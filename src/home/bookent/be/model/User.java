@@ -2,10 +2,15 @@ package home.bookent.be.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +24,9 @@ public class User {
     
     @Column(name = "NAME", unique = false, nullable = false)
     private String name;
+    
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    private Set<Book> users = new HashSet<Book>();
     
     public int getId() {
         return id;
